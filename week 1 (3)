@@ -1,0 +1,22 @@
+import sys
+import re
+
+def read_file(filename):
+    f = open(filename, 'r')
+    genome = f.readline().strip()
+    return genome
+    f.close()
+
+def occurrences(pattern, genome):
+    matches = re.finditer(r'(?=(%s))' % re.escape(pattern), genome)
+    return [m.start(1) for m in matches]
+
+if __name__ == '__main__':
+
+    argv = sys.argv[-1]
+    genome = read_file(argv)
+    result = ' '.join(map(str,occurrences('CTTGATCAT', genome)))
+    
+    fw = open('./output.3_3.txt', 'w')
+    fw.write(result)
+    fw.close()
