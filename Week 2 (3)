@@ -1,0 +1,27 @@
+import sys
+
+def read_file(filename):
+    f = open(filename, 'r')
+    genome = f.read()
+    return genome
+    f.close()
+
+def skew(genome):
+    return genome.count('G') - genome.count('C')
+
+def prefix(genome,i):
+    return genome[:i]
+
+def skew_diagram(genome):
+    result = []
+    for i in range(15):
+    # for i in range(len(genome)+1):
+        result.append(skew(prefix(genome,i)))
+    return result
+
+if __name__ == '__main__':
+
+    # genome = read_file(sys.argv[-1]).strip().upper()
+    genome = 'GAGCCACCGCGATA'
+    result = skew_diagram(genome)
+    print ' '.join(map(str,result))
